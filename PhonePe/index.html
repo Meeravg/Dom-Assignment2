@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhonePe</title>
+</head>
+<style>
+    body{
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="process" style="display: none;">
+        <h3>Processing...</h3>
+    </div>
+    <div class="success" style="display: none;">
+        <img src="./WhatsApp Image 2023-12-14 at 12.10.43 AM.jpeg" alt="success_image..">
+    </div>
+    <div class="failed" style="display: none;">
+        <img src="./WhatsApp Image 2023-12-14 at 12.10.55 AM.jpeg" alt="Failed_image">
+    </div>
+</body>
+
+</html>
+
+<script>
+    let payment = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            const success = Math.random() < 0.50;
+            success ? resolve() : reject();
+        }, 1000);
+    })
+
+    function processUI(){
+        document.querySelector(".process").style.display = "block";
+    }
+    function successUI(){
+        document.querySelector(".process").style.display = "none";
+        document.querySelector(".success").style.display = "block";
+    }
+    function failedUI(){
+        document.querySelector(".process").style.display = "none";
+        document.querySelector(".failed").style.display = 'block';
+    }
+
+
+    function display(){
+        processUI();
+
+        payment.then(()=> {
+            successUI()
+        }).catch(() => {
+            failedUI()
+        });
+    }
+
+    display()
+</script>
